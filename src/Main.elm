@@ -143,12 +143,12 @@ view model =
                 ]
             ]
         , sectionView "LIFF properties" <|
-            [ p [ style "word-wrap" "break-word" ] [ text ("Version: " ++ model.version) ]
-            , p [ style "word-wrap" "break-word" ] [ text ("Language: " ++ model.language) ]
-            , p [ style "word-wrap" "break-word" ] [ text ("LoggedIn: " ++ b2s model.isLoggedIn) ]
+            [ textView <| "Version: " ++ model.version
+            , textView <| "Language: " ++ model.language
+            , textView <| "LoggedIn: " ++ b2s model.isLoggedIn
             ]
         , sectionView "Credentials" <|
-            [ p [ style "word-wrap" "break-word" ] [ text ("My access token: " ++ omit model.token) ]
+            [ textView <| "My access token: " ++ omit model.token
             ]
         , sectionView "Open/Close window" <|
             [ button [ onClick OpenWindow ] [ text "Open Window." ]
@@ -157,13 +157,13 @@ view model =
         , sectionView "User Profile" <|
             [ button [ onClick GetProfile ] [ text "Get User Profile" ]
             , div []
-                [ text <| "User id: " ++ omit model.profile.userId
+                [ textView <| "User id: " ++ omit model.profile.userId
                 ]
             , div []
-                [ text <| "Username: " ++ model.profile.displayName
+                [ textView <| "Username: " ++ model.profile.displayName
                 ]
             , div []
-                [ text "Picture profile: "
+                [ textView "Picture profile: "
                 , img
                     [ style "width" "50px"
                     , style "height" "50px"
@@ -174,6 +174,11 @@ view model =
             ]
         , div [] [ text model.error ]
         ]
+
+
+textView : String -> Html msg
+textView s =
+    p [ style "word-wrap" "break-word" ] [ text s ]
 
 
 sectionView : String -> List (Html msg) -> Html msg
